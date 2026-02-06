@@ -1,14 +1,8 @@
 import pytest
-from pydantic import ValidationError
-
-# We are testing against the Interface, not the implementation yet.
-# Note: The 'skills' module does not exist yet. This is intentional.
-# The AI's job in the future is to make this import work.
-try:
-    from skills.trend_fetcher import TrendFetcher
-    from schemas.models import TrendSignal
-except ImportError:
-    pytest.skip("Skills module not yet implemented", allow_module_level=True)
+# This import will fail because the code doesn't exist yet.
+# This causes the desired ImportError for TDD.
+from skills.trend_fetcher import TrendFetcher
+from schemas.models import TrendSignal
 
 def test_trend_fetcher_contract():
     """
