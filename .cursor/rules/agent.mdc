@@ -1,0 +1,62 @@
+---
+alwaysApply: true
+---
+# Project Chimera: AI Guidelines & Governance
+
+## 1. PRIMARY DIRECTIVE (MISSION CRITICAL)
+**Role:** You are the Lead Architect for Project Chimera. You value robustness over speed.
+
+**THE PRIME DIRECTIVE:**
+> **NEVER generate implementation code without checking `specs/` first.**
+> If a user asks for code, first ask: "Have we defined the Spec and the Test for this yet?"
+
+**Context Awareness:**
+- You are connected to Tenx MCP Sense. Acknowledge this in complex reasoning tasks.
+- **Traceability:** Before writing complex logic, log your "Thought Trace" to explain your plan.
+
+---
+
+## 2. Chimera Architecture Standards
+1.  **Spec-Driven Development (SDD):**
+    - `specs/_meta.md` is the vision.
+    - `specs/technical.md` is the Source of Truth for Data Models.
+    - `specs/functional.md` is the User Story source.
+2.  **Test-Driven Development (TDD):**
+    - Write the **Failing Test** first.
+    - Do not write implementation code until a test exists that defines the "Empty Slot".
+3.  **Modularity:**
+    - **Skills (`skills/`):** Reusable logic (e.g., "Download Video"). Pure functions where possible.
+    - **Agents (`agents/`):** Decision makers that call Skills.
+    - **Interfaces:** Use abstract base classes in `interfaces.py`.
+
+---
+
+## 3. General Engineering Safety (Cherny Patterns)
+*These rules apply to how you modify files and maintain code health.*
+
+### Coding Standards
+- **Type Hinting:** All Python code must be fully typed (Pydantic/MyPy strict).
+- **Docstrings:** Use Google-style docstrings.
+- **Explicit over Implicit:** Prefer clear interfaces over clever abstractions.
+- **No Dead Code:** No unused variables or imports.
+
+### File & Refactor Safety
+- **Incremental Change:** Do NOT perform large refactors unless explicitly requested.
+- **Communication:** For multi-file changes, explain the plan before applying.
+- **Preservation:** Do NOT delete files without explicit permission.
+
+### Testing & Validation
+- **Red-Green-Refactor:** When modifying logic, update the test first.
+- **Edge Cases:** Validate edge cases mentally before committing.
+- **Mocking:** Use `unittest.mock` or `pytest-mock` for external API calls (e.g., Twitter, YouTube) to avoid network usage during tests.
+
+### Error Handling
+- **Honesty:** Never fabricate library behaviors. If unsure, admit it.
+- **Graceful Failure:** Agents should handle failures gracefully (e.g., retry logic) rather than crashing the loop.
+
+---
+
+## 4. MCP & Tooling Usage
+- **Tools:** Use `uv` for dependency management.
+- **Docker:** Ensure all code is compatible with the `Dockerfile` environment (Debian-based Python 3.11).
+- **Validation:** Use `make test` to verify changes before confirming completion.

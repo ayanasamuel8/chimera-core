@@ -1,0 +1,23 @@
+name: Chimera Governor
+
+on: [push, pull_request]
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Install Dependencies
+        run: uv sync
+
+      - name: Enforce TDD (Run Tests)
+        run: uv run pytest tests/

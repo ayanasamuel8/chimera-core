@@ -1,0 +1,17 @@
+[project]
+name = "chimera-core"
+version = "0.1.0"
+description = "Autonomous AI Influencer Orchestration Engine"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "requests",
+    "python-dotenv"
+]
+
+[dev-dependencies]
+pytest = "^8.0"
+ruff = "^0.3"
